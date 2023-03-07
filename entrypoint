@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Exit on any error
+set -e
+
+# Check MGI10X_PROGRAM_PATH
+if [ -z "$MGI10X_PROGRAM_PATH" ] || [ ! -e "$MGI10X_PROGRAM_PATH/sourceme.bash" ]; then
+    echo "Docker is misconfigured! Need MGI10X_PROGRAM_PATH ENV set with existing sourceme.bash inside!"
+    exit 1
+fi
+
+# Source 10X Profile
+#. "${MGI10X_PROGRAM_PATH}/sourceme.bash"
+/bin/sh "$MGI10X_PROGRAM_PATH/sourceme.bash"
+
+# Run command
+"$@"
